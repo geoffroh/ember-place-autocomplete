@@ -38,12 +38,24 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     this._applyDefaults();
+    this.setupGoogleAndNavigator();
+  },
 
-    const owner = getOwner(this);
-    const google = owner.lookup('google:main');
-    const navigator = owner.lookup('navigator:main');
+  setupGoogleAndNavigator() {
+    const owner = getOwner(this)
 
-    this.setProperties({ google, navigator });
+    if (!owner.lookup('google:main')) {
+      owner.register('google:main', window.google, { instantiate: false });
+    }
+
+    if (!owner.lookup('navigator:main')) {
+      owner.register('navigator:main', window.navigator, { instantiate: false });
+    }
+
+    this.setProperties({ 
+      google: owner.lookup('google:main'), 
+      navigator: owner.lookup('navigator:main') 
+    });
   },
 
   /**
