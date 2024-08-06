@@ -44,7 +44,7 @@ module.exports = {
         if (config.environment === 'test') {
           content = '<script type="text/javascript" src="' + src + '"></script>';
         } else {
-          content = '<script type="text/javascript" src="' + src + '" async defer></script>';
+          content = '<script type="text/javascript" src="' + src + '" async></script>';
         }
       }
     }
